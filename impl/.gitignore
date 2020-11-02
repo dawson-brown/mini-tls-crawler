@@ -1,0 +1,7 @@
+# Don't push binaries to Git
+debug/
+release/
+tests/
+
+# Don't push compiled docs either
+docs/

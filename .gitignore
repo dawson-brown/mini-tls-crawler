@@ -1,0 +1,53 @@
+# Config headers
+crl_database_credentials.h
+
+#vscode stuff
+.vscode/
+settings.json
+tasks.json
+launch.json
+extensions.json
+
+# Object files
+*.o
+
+# Key chain
+*.pem
+
+# Executable
+crl_main
+tests
+
+# Tex stuff:
+# aux
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
+
+# bib
+*.bbl
+*.bcf
+*.blg
+
+# actual pdf docs
+*.pdf
+
+# application files
+# this includes configuration and input files
+*.conf
+*.list
+*.log
+
+
+## ignore doxygen generate files
+## html/
+## latex/

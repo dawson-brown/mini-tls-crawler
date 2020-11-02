@@ -1,0 +1,104 @@
+OBJDIR = debug
+dummy_build_folder := $(shell mkdir -p $(OBJDIR))
+
+CFLAGS  += -DDEBUG -g -pthread -I. -D_FILE_OFFSET_BITS=64 -Wall
+OFLAGS  = -O0
+
+OBJS= $(OBJDIR)/aes.o \
+	$(OBJDIR)/aesni.o \
+	$(OBJDIR)/arc4.o \
+	$(OBJDIR)/aria.o \
+	$(OBJDIR)/asn1parse.o \
+	$(OBJDIR)/asn1write.o \
+	$(OBJDIR)/base64.o \
+	$(OBJDIR)/bignum.o \
+	$(OBJDIR)/blowfish.o \
+	$(OBJDIR)/camellia.o \
+	$(OBJDIR)/ccm.o \
+	$(OBJDIR)/certs.o \
+	$(OBJDIR)/chacha20.o \
+	$(OBJDIR)/chachapoly.o \
+	$(OBJDIR)/cipher.o \
+	$(OBJDIR)/cipher_wrap.o \
+	$(OBJDIR)/cmac.o \
+	$(OBJDIR)/ctr_drbg.o \
+	$(OBJDIR)/debug.o \
+	$(OBJDIR)/des.o \
+	$(OBJDIR)/dhm.o \
+	$(OBJDIR)/ecdh.o \
+	$(OBJDIR)/ecdsa.o \
+	$(OBJDIR)/ecjpake.o \
+	$(OBJDIR)/ecp.o \
+	$(OBJDIR)/ecp_curves.o \
+	$(OBJDIR)/entropy.o \
+	$(OBJDIR)/entropy_poll.o \
+	$(OBJDIR)/error.o \
+	$(OBJDIR)/gcm.o \
+	$(OBJDIR)/havege.o \
+	$(OBJDIR)/hkdf.o \
+	$(OBJDIR)/hmac_drbg.o \
+	$(OBJDIR)/md2.o \
+	$(OBJDIR)/md4.o \
+	$(OBJDIR)/md5.o \
+	$(OBJDIR)/md.o \
+	$(OBJDIR)/md_wrap.o \
+	$(OBJDIR)/memory_buffer_alloc.o \
+	$(OBJDIR)/net_sockets.o \
+	$(OBJDIR)/nist_kw.o \
+	$(OBJDIR)/oid.o \
+	$(OBJDIR)/padlock.o \
+	$(OBJDIR)/pem.o \
+	$(OBJDIR)/pk.o \
+	$(OBJDIR)/pkcs11.o \
+	$(OBJDIR)/pkcs12.o \
+	$(OBJDIR)/pkcs5.o \
+	$(OBJDIR)/pkparse.o \
+	$(OBJDIR)/pk_wrap.o \
+	$(OBJDIR)/pkwrite.o \
+	$(OBJDIR)/platform.o \
+	$(OBJDIR)/platform_util.o \
+	$(OBJDIR)/poly1305.o \
+	$(OBJDIR)/ripemd160.o \
+	$(OBJDIR)/rsa.o \
+	$(OBJDIR)/rsa_internal.o \
+	$(OBJDIR)/sha1.o \
+	$(OBJDIR)/sha256.o \
+	$(OBJDIR)/sha512.o \
+	$(OBJDIR)/ssl_cache.o \
+	$(OBJDIR)/ssl_ciphersuites.o \
+	$(OBJDIR)/ssl_cli.o \
+	$(OBJDIR)/ssl_cookie.o \
+	$(OBJDIR)/ssl_srv.o \
+	$(OBJDIR)/ssl_ticket.o \
+	$(OBJDIR)/ssl_tls.o \
+	$(OBJDIR)/threading.o \
+	$(OBJDIR)/timing.o \
+	$(OBJDIR)/version.o \
+	$(OBJDIR)/version_features.o \
+	$(OBJDIR)/x509.o \
+	$(OBJDIR)/x509_create.o \
+	$(OBJDIR)/x509_crl.o \
+	$(OBJDIR)/x509_crt.o \
+	$(OBJDIR)/x509_csr.o \
+	$(OBJDIR)/x509write_crt.o \
+	$(OBJDIR)/x509write_csr.o \
+	$(OBJDIR)/xtea.o  \
+	$(OBJDIR)/crl_tls.o \
+	$(OBJDIR)/crl_net.o \
+	$(OBJDIR)/crl_database.o -lmysqlclient \
+	$(OBJDIR)/crl_threads.o \
+	$(OBJDIR)/crl_logging.o \
+	$(OBJDIR)/crl_main_helpers.o
+
+
+all: $(OBJDIR)/crl_main
+
+.SILENT:
+	
+$(OBJDIR)/%.o: %.c
+	echo "  CC    $<"
+	$(CC) $(CFLAGS) $(OFLAGS) -c $< -o $@
+
+$(OBJDIR)/crl_main: crl_main.c $(OBJS)
+	echo   "  CC    crl_main"
+	$(CC) $(CFLAGS) $(OFLAGS) crl_main.c -lm -o $@ $(OBJS)
