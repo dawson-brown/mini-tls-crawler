@@ -1,10 +1,10 @@
-# ECDSA Keys
+# Mini TLS Crawler
 
-A tool for crawling the IPv4 space and saving ECDSA keys.
+A tool for crawling the IPv4 space and saving data resultant from a TLS handshake. This can include: certificates, key exchange information, and TCP/IP information.
 
 ## Prerequisites
 
-This project must be run in Linux with MySQL, GCC, Doxygen installed.
+This project must be run in Linux with MySQL and GCC installed. Doxygen is used to generate documentation.
 
 For Ubuntu 20.04:
 
@@ -17,14 +17,14 @@ Here's how to make a user for your account on Ubuntu 20.04.
 First, type `sudo mysql` to enter MySQL as admin.
 
 ```
-drop user taimoor@localhost;
+drop user username@localhost;
 flush privileges;
-create user taimoor@localhost identified by 'YOUR_PASSWORD';
-grant all privileges on *.* to taimoor@localhost;
+create user username@localhost identified by 'YOUR_PASSWORD';
+grant all privileges on *.* to username@localhost;
 ```
 
 ## Building
-Once mysql is installed along with the C API, the header file `crl_database_credentials.h` must be created in `prop_impl/`. This file must have the following definitions:
+Once mysql is installed along with the C API, the header file `crl_database_credentials.h` must be created in `impl/`. This file must have the following definitions:
 
 ```
 #define MYSQL_HOST "hostname"
@@ -34,7 +34,7 @@ Once mysql is installed along with the C API, the header file `crl_database_cred
 
 Once the credentials for the database have been defined, the application can be built.
 
-In order to build, from a terminal navigate to the directory `prop_impl/` in the project. To build for debugging, simply type:
+In order to build, from a terminal navigate to the directory `impl/` in the project. To build for debugging, simply type:
 
 ```
 make debugging
